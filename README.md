@@ -29,7 +29,9 @@ Please implement this project within a reasonable time frame.  I will function a
 
 
 ## Bonus Points
-1.  Custom directive that will load a users name based on a ID lookup
-    i.e. <user user-id='id'/>  would render <div> Robert Polak <div> 
+1. Custom angular directive that will load a users name based on a id value.
+```
+<user-lookup user-id='id'>
+```
 2. Show your css/html skills, bootstrap.
 3. Demonstate a couple Unit Tests
