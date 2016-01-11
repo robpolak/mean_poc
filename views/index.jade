@@ -1,0 +1,77 @@
+extends layout
+
+block content
+    //
+        script(type='text/ng-template' id='myModalContent.html')
+            div(class='modal-header')
+                h3(class='modal-title') I'm a modal!
+            div(class='modal-body')
+                | Modal message
+            div(class='modal-footer')
+                button(class='btn btn-primary' type='button' ng-click='ok()')
+                    OK
+                button(class='btn btn-warning' type='button' ng-click='cancel()')
+                    Cancel
+
+        button(type='button' class='btn btn-default' ng-click='open()')
+            | Open me!
+
+    nav(class='navbar navbar-inverse')
+        div(class='container-fluid')
+            div(class='navbar-header')
+                a(class='navbar-brand', href='#') M-MEAN-J Proof of Concept
+            ul(class='nav navbar-nav')
+                li(class='active')
+                    a(href='#') Home
+                li
+                    a(href="adduser") Add a User
+            form(class='navbar-form navbar-right' role='search')
+                div(class='form-group')
+                    input(data-ng-model='query', class='form-control', placeholder='Search Userlist')
+
+    div(class='container-fluid')
+        div(class='row')
+            div(class='col-md-10')
+                table(class='table table-striped')
+                    thead
+                        th #
+                        th First Name
+                        th Last Name
+                        th Phone
+                        th Mother
+                        th Father
+                        th
+                            button(class='btn btn-warning btn-xs btn-block disabled') Change
+                        th
+                            button(class='btn btn-danger btn-xs btn-block disabled') Delete
+                    tbody
+                        tr(data-ng-repeat='user in users | filter:query' data-ng-class="{'selected':$index == hoveredRow}" data-ng-mouseover="setHoveredRow($index)" data-ng-mouseout="unsetHoveredRow($index)")
+                            td {{ $index }}
+                            td {{ user.fname }}
+                            td {{ user.lname }}
+                            td {{ user.phone }}
+                            td {{ user.mother }}
+                            td {{ user.father }}
+                            td
+                                button(data-ng-show="$index==hoveredRow" data-ng-click='editUser', type='button', class='btn btn-warning btn-xs btn-block') Change
+                            td
+                                button(data-ng-show="$index==hoveredRow" data-ng-click='deleteUser', type='button', class='btn btn-danger btn-xs btn-block') Delete
+
+            div(class='col-md-2')
+                h2 Edit User
+                | (Coming soon)
+                #addUser
+                    form(name='userForm')
+                        div(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
+                            input#inputUserFName(data-ng-model='formData.fname', name='fname', type='text',  placeholder='First Name (Req)', 'required ng-maxlength=50')
+                            p(ng-show='userForm.fname.$invalid && !userForm.fname.$pristine', class='help-block')
+                                | First Name is required and should be less that 50 characters
+                        div(class='form-group')
+                            input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
+                            p(ng-show='userForm.lname.$invalid && !userForm.lname.$pristine', class='help-block')
+                                | Last Name is required and should be less than 50 characters
+                        div(class='form-group')
+                            input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'required ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                        div(class='form-group')
+                            button(data-ng-click='saveUser()', type='submit', class='btn btn-primary', ng-disabled='userForm.$invalid')
+                                | Save User

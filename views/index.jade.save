@@ -1,0 +1,41 @@
+extends layout
+
+block content
+    h1= title
+    div(class='container-fluid')
+        div(class='row')
+            div(class='col-md-2')
+                | Search:
+                input(data-ng-model='query')
+                | Sort by:
+                select(data-ng-model='orderProp')
+                    option(value='name') Alphabetical
+                    option(value='age') Newest
+            div(class='col-md-10')
+                // Wrapper
+                #wrapper
+
+                    // USER LIST
+                    #userList
+                        h2 User List
+                            table
+                                thead
+                                    th First Name
+                                    th Last Name
+                                    th Phone
+                                    th Delete?
+                                    th Edit?
+                                tbody
+                    // /USER LIST
+                    // ADD USER
+                    h2 Add User
+                    #addUser
+                        fieldset
+                            input#inputUserFName(type='text', placeholder='First Name')
+                            input#inputUserLName(type='text', placeholder='Last Name')
+                            input#inputUserPhone(type='text', placeholder='Phone Number (1112223333)')
+                            button#btnAddUser Add User
+                            button#btnEditUser Edit User
+                // /ADD USER
+
+            // /WRAPPER

@@ -1,0 +1,48 @@
+extends layout
+
+block content
+    nav(class='navbar navbar-inverse')
+        div(class='container-fluid')
+            div(class='navbar-header')
+                a(class='navbar-brand', href='#') M-MEAN-J Proof of Concept
+            ul(class='nav navbar-nav')
+                li
+                    a(href='/') Home
+                li(class='active')
+                    a(href="adduser") Add a User
+
+    div(class='container-fluid')
+        div(class='row')
+            div(class='col-md-12')
+                h2 Add User
+                #addUser
+                    form(name='userForm')
+                        table(class='table table-striped')
+                            thead
+                                th First Name (Required)
+                                th Last Name (Required)
+                                th Phone (US with Area Code)
+                                th Mother
+                                th Father
+                                th
+
+                            tbody
+                                tr
+                                    td(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
+                                        input#inputUserFName(data-ng-model='formData.fname', name='fname', type='text',  placeholder='First Name (Req)', 'required ng-maxlength=50')
+                                    td(class='form-group')
+                                        input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
+                                    td(class='form-group')
+                                        input#inputUserPhone(data-ng-model='formData.phone', name='phone', type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                    td
+                                    td
+                                    td(class='form-group')
+                                        button(data-ng-click='addUser()', type='submit', class='btn btn-primary', ng-disabled='userForm.$invalid')
+                                            | Add User
+                                tr(ng-show='userForm.fname.$invalid && !userForm.fname.$pristine')
+                                    th(colspan='6') First Name is required and should be less that 50 characters
+                                tr(ng-show='userForm.lname.$invalid && !userForm.lname.$pristine')
+                                    th(colspan='6') Last Name is required and should be less than 50 characters
+                                tr(ng-show='userForm.phone.$invalid && !userForm.phone.$pristine')
+                                    th(colspan='6') Phone is not required but should include the area code ie. 111 222 3333
+
