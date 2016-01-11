@@ -13,6 +13,18 @@ router.get('/userlist', function(req, res) {
 });
 
 /*
+ * GET userdetails.
+ */
+router.get('/userdetails/:id', function(req, res) {
+    var db = req.db;
+    var userToSee = req.params.id;
+    var collection = db.get('userlist');
+    collection.findOne(userToSee,function(e,docs){
+        res.json(docs);
+    });
+});
+
+/*
  * POST to adduser.
  */
 router.post('/adduser', function(req, res) {

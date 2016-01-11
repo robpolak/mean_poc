@@ -1,6 +1,7 @@
 extends layout
 
 block content
+    user-lookup(userid='5693dd15e88567d6538a70a6')
     //
         script(type='text/ng-template' id='myModalContent.html')
             div(class='modal-header')
@@ -46,14 +47,14 @@ block content
                             button(class='btn btn-danger btn-xs btn-block disabled') Delete
                     tbody
                         tr(data-ng-repeat='user in users | filter:query' data-ng-class="{'selected':$index == hoveredRow}" data-ng-mouseover="setHoveredRow($index)" data-ng-mouseout="unsetHoveredRow($index)")
-                            td {{ $index }}
+                            td {{ user._id }}
                             td {{ user.fname }}
                             td {{ user.lname }}
                             td {{ user.phone }}
                             td {{ user.mother }}
                             td {{ user.father }}
                             td
-                                button(data-ng-show="$index==hoveredRow" data-ng-click='editUser', type='button', class='btn btn-warning btn-xs btn-block') Change
+                                button(data-ng-show="$index==hoveredRow" data-ng-click='editUser', data-uid='{{ user._id }}', type='button', class='btn btn-warning btn-xs btn-block') Change
                             td
                                 button(data-ng-show="$index==hoveredRow" data-ng-click='deleteUser', type='button', class='btn btn-danger btn-xs btn-block') Delete
 

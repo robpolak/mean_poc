@@ -13,6 +13,17 @@
           <option name="shellArgumentsLine" value="-dbpath ./data" />
           <option name="userDatabase" value="mean_poc" />
         </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="MongoLab" />
+          <option name="password" value="TinyTrain" />
+          <option name="serverUrls">
+            <list>
+              <option value="ds037415.mongolab.com:37415" />
+            </list>
+          </option>
+          <option name="userDatabase" value="mpoc_db" />
+          <option name="username" value="mpoc_user" />
+        </ServerConfiguration>
       </list>
     </option>
     <option name="shellPath" value="/usr/bin/mongod" />

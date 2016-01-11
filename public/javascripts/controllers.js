@@ -5,7 +5,7 @@
 var meanpocControllers = angular.module('meanpocControllers', []);
 
 meanpocControllers.controller('UserListCtrl', ['$scope', '$http',
-    function($scope, $http) {
+    function($scope, $http, userLookup) {
         $scope.formData = {};
 
         $scope.hoveredRow = null;  // initialize our variable to null
@@ -48,6 +48,15 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http',
         };
 
     }]);
+
+meanpocControllers.directive('userLookup', function (){
+    scope: {
+        userid: '@'
+    }
+    $http.get('users/userdetail/userid').success(function(data) {
+        $scope.user = data;
+    });
+});
 
 meanpocControllers.controller('UserDetailCtrl', ['$scope', '$routeParams',
     function($scope, $routeParams) {
