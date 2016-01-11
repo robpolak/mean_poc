@@ -49,15 +49,6 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http',
 
     }]);
 
-meanpocControllers.directive('userLookup', function (){
-    scope: {
-        userid: '@'
-    }
-    $http.get('users/userdetail/userid').success(function(data) {
-        $scope.user = data;
-    });
-});
-
 meanpocControllers.controller('UserDetailCtrl', ['$scope', '$routeParams',
     function($scope, $routeParams) {
         $scope.userId = $routeParams.userId;
