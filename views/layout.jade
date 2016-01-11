@@ -1,0 +1,17 @@
+doctype html
+html(data-ng-app="meanpocApp")
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.css')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+        script(src='/javascripts/global.js')
+        script(src = '/bower_components/angular/angular.js')
+        script(src = '/javascripts/controllers.js')
+        script(src = '/bower_components/angular-route/angular-route.js')
+        script(src = '/javascripts/app.js')
+        script(src = '/javascripts/ui-bootstrap-custom.js')
+
+    body(data-ng-controller='UserListCtrl')
+
+        block content

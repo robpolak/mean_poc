@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html data-ng-app="meanpocApp">
+<head>
+    <title>MEAN Test Project</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="/javascripts/global.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/javascripts/controllers.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/javascripts/app.js"></script>
+</head>
+<body data-ng-controller="UserListCtrl">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">Search:
+            <input data-ng-model="query">
+            <h2>Add User</h2>
+            <div id="addUser">
+                <form>
+                    <div class="form-group">
+                        <input id="inputUserFName" data-ng-model="formData.fname" type="text" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <input id="inputUserLName" data-ng-model="formData.lname" type="text" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input id="inputUserPhone" data-ng-model="formData.phone" type="text" placeholder="Phone Number (1112223333)">
+                    </div>
+                    <div class="form-group">
+                        <input id="saveUser" ng-click="saveUser" type="submit" value="Save User" class="btn btn-primary">
+                        <!--button#btnAddUser Save User--><!--button#btnEditUser Edit User-->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <table class="table table-striped">
+                <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                </thead>
+                <tbody>
+                <tr ng-click="editUser" data-ng-repeat="user in users | filter:query | orderBy:orderProp">
+                    <td>{{ user.fname }}</td>
+                    <td>{{ user.lname }}</td>
+                    <td>{{ user.phone }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
