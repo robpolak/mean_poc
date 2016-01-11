@@ -57,7 +57,8 @@ block content
                             td
                                 button(data-ng-show="$index==hoveredRow" data-ng-click='editUser', data-uid='{{ user._id }}', type='button', class='btn btn-warning btn-xs btn-block') Change
                             td
-                                button(data-ng-show="$index==hoveredRow" data-ng-click='deleteUser', type='button', class='btn btn-danger btn-xs btn-block') Delete
+                                form
+                                    button(data-ng-show="$index==hoveredRow" data-ng-click='deleteUser', type='button', class='btn btn-danger btn-xs btn-block') Delete
 
             div(class='col-md-2')
                 h2 Edit User

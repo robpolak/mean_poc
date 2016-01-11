@@ -57,10 +57,10 @@ router.post('/edituser/:id', function(req, res) {
 /*
  * DELETE to deleteuser.
  */
-router.delete('/deleteuser/:id', function(req, res) {
+router.delete('/deleteuser', function(req, res) {
     var db = req.db;
     var collection = db.get('userlist');
-    var userToDelete = req.params.id;
+    var userToDelete = req.body.id;
     collection.remove({ '_id' : userToDelete }, function(err) {
         res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
     });

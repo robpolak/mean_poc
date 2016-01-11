@@ -4,8 +4,8 @@
 
 var meanpocControllers = angular.module('meanpocControllers', []);
 
-meanpocControllers.controller('UserListCtrl', ['$scope', '$http',
-    function($scope, $http, userLookup) {
+meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams',
+    function($scope, $http, $routeParams) {
         $scope.formData = {};
 
         $scope.hoveredRow = null;  // initialize our variable to null
@@ -36,6 +36,19 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http',
 
         $scope.saveUser = function() {
             $http.put('/users/saveuser', $scope.formData)
+                .success(function(data) {
+                    $scope.formData = {}; // clear the form so our user is ready to enter another
+                    $scope.users = data;
+                    console.log(data);
+                    $scope.userForm.$setPristine();
+                })
+                .error(function(data) {
+                    console.log('Error: ' + data);
+                });
+        };
+
+        $scope.deleteUser = function() {
+            $http.put('/users/deleteuser/', $scope.formData)
                 .success(function(data) {
                     $scope.formData = {}; // clear the form so our user is ready to enter another
                     $scope.users = data;
