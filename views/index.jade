@@ -45,7 +45,7 @@ block content
                             button(class='btn btn-danger btn-xs btn-block disabled') Delete
                     tbody
                         tr(data-ng-repeat='user in users | filter:search' data-ng-class="{'selected':$index == hoveredRow}" data-ng-mouseover="setHoveredRow($index)" data-ng-mouseout="unsetHoveredRow($index)")
-                            td {{ user.fname }} {{ user._id }}
+                            td {{ user.fname }}
                             td {{ user.lname }}
                             td {{ user.phone }}
 
@@ -61,7 +61,6 @@ block content
             div(class='col-md-2')
                 div
                     h2 Edit User
-                    | (Coming soon)
                     #addUser
                         form(name='userForm')
                             div(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
@@ -73,7 +72,7 @@ block content
                                 p(ng-show='userForm.lname.$invalid && !userForm.lname.$pristine', class='help-block')
                                     | Last Name is required and should be less than 50 characters
                             div(class='form-group')
-                                input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'required ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
                             div(class='form-group')
                                 button(data-ng-click='saveUser($event)', data='{{ formData._id }}', type='submit', class='btn btn-primary', ng-disabled='userForm.$invalid')
                                     | Save User

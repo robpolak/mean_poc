@@ -43,7 +43,7 @@ router.post('/adduser', function(req, res) {
 /*
  * PUT to edituser.
  */
-router.post('/edituser/:id', function(req, res) {
+router.post('/saveuser/:id', function(req, res) {
     var db = req.db;
     var collection = db.get('userlist');
     var userToEdit = req.params.id;
@@ -61,14 +61,9 @@ router.post('/deleteuser', function(req, res) {
     var db = req.db;
     var collection = db.get('userlist');
     var userToDelete = req.body.id;
-    console.info(userToDelete);
     collection.remove({ '_id' : userToDelete }, function(err, result) {
         if (err)
             res.send(err);
-
-        //collection.find({},{},function(e,docs){
-        //    res.json(docs);
-        //});
     });
 });
 

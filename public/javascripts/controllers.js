@@ -46,8 +46,10 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
                 });
         };
 
-        $scope.saveUser = function() {
-            $http.put('/users/saveuser', $scope.formData)
+        $scope.saveUser = function(obj) {
+            var uid = obj.target.attributes.data.value;
+
+            $http.post('/users/saveuser/' + uid, $scope.formData)
                 .success(function(data) {
                     $scope.formData = {}; // clear the form so our user is ready to enter another
                     $scope.users = data;
@@ -57,6 +59,7 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
                 .error(function(data) {
                     console.log('Error: ' + data);
                 });
+            loadUserList();
         };
 
         $scope.deleteUser = function(obj) {
