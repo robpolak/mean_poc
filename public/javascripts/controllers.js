@@ -24,6 +24,20 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
         };
         loadUserList();
 
+        // gets the template to ng-include for a table row / item
+        $scope.getTemplate = function (user) {
+            if (user.id === $scope.user.selected.id) return 'edit';
+            else return 'display';
+        };
+
+        $scope.showEditUser = function (user) {
+            $scope.user.selected = angular.copy(user);
+        };
+
+        $scope.reset = function () {
+            $scope.user.selected = {};
+        };
+
         $scope.addUser = function() {
             $http.post('/users/adduser', $scope.formData)
                 .success(function(data) {
