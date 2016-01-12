@@ -16,6 +16,7 @@ var db = monk('mongodb://mpoc_user:TinyTrain@ds037415.mongolab.com:37415/mpoc_db
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var adduser = require('./routes/adduser');
+var edituser = require('./routes/edituser');
 
 var app = express();
 
@@ -42,6 +43,7 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use('/users', users);
 app.use('/adduser', adduser);
+app.use('/edituser', edituser);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

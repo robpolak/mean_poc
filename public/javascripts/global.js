@@ -1,30 +1,30 @@
 // Userlist data array for filling in info box
-var userListData = [];
+//var userListData = [];
 
 // DOM Ready =============================================================
 $(document).ready(function() {
 
+
     // Populate the user table on initial page load
-    populateTable();
+   // populateTable();
     
     // Username link click
-    $('#userList table tbody').on('click', 'td a.linkshowuser', showUserInfo);
+    //$('#userList table tbody').on('click', 'td a.linkshowuser', showUserInfo);
     
     // Edit the user link click
-    $('#userList table tbody').on('click', 'td a.linkedituser', editUserInfo);
+    //$('#userList table tbody').on('click', 'td a.linkedituser', editUserInfo);
 
     // Add User button click
-    $('#btnAddUser').on('click', addUser);
+    //$('#btnAddUser').on('click', addUser);
     
     // Edit User button click
-    $('#btnEditUser').on('click', editUser);
+    //$('#btnEditUser').on('click', editUser);
    
     // Delete User link click
-    $('#userList table tbody').on('click', 'td a.linkdeleteuser', deleteUser);
+    //$('#userList table tbody').on('click', 'td a.linkdeleteuser', deleteUserjs);
 
 
 });
-
 // Functions =============================================================
 
 // Fill table with data
@@ -56,7 +56,7 @@ function populateTable() {
 };
 
 // Show User Info
-function showUserInfo(event) {
+function showUserInfojs(event) {
 
     // Prevent Link from Firing
     event.preventDefault();
@@ -77,7 +77,7 @@ function showUserInfo(event) {
 };
 
 // Show User Info for edit
-function editUserInfo(event) {
+function editUserInfojs(event) {
 
     // Prevent Link from Firing
     event.preventDefault();
@@ -102,7 +102,7 @@ function editUserInfo(event) {
 };
 
 // Add User
-function addUser(event) {
+function addUserjs(event) {
     event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
@@ -155,7 +155,7 @@ function addUser(event) {
 };
 
 // Edit User
-function editUser(event) {
+function editUserjs(event) {
     event.preventDefault();
 
     // Super basic validation - increase errorCount variable if any fields are blank
@@ -212,8 +212,7 @@ function editUser(event) {
 };
 
 // Delete User
-function deleteUser(event) {
-
+function deleteUserjs(event) {
     event.preventDefault();
 
     // Pop up a confirmation dialog
@@ -225,7 +224,7 @@ function deleteUser(event) {
         // If they did, do our delete
         $.ajax({
             type: 'DELETE',
-            url: '/users/deleteuser/' + $(this).attr('rel')
+            url: '/users/deleteuser/' + $(this).attr('data-uid')
         }).done(function( response ) {
 
             // Check for a successful (blank) response
