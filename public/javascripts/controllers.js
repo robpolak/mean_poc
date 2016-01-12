@@ -31,7 +31,6 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
                 $scope.formData = data;
             })
         };
-        //loadUserDetail();
 
         $scope.addUser = function(obj) {
             $http.post('/users/adduser', $scope.formData)

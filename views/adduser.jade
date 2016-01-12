@@ -22,6 +22,7 @@ block content
                                 th First Name (Required)
                                 th Last Name (Required)
                                 th Phone (US with Area Code)
+                                th Gender
                                 th Mother
                                 th Father
                                 th
@@ -34,6 +35,14 @@ block content
                                         input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
                                     td(class='form-group')
                                         input#inputUserPhone(data-ng-model='formData.phone', name='phone', type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                    td(class='form-group')
+                                        span
+                                            input(type='radio', data-ng-model='formData.gender', name='gender', value='M' checked=gender == "M")
+                                            | Male
+                                        = '       '
+                                        span
+                                            input(type='radio', data-ng-model='formData.gender', name='gender', value='F' checked=gender == "F")
+                                            | Female
                                     td
                                     td
                                     td(class='form-group')
