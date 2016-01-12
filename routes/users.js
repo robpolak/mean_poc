@@ -57,12 +57,18 @@ router.post('/edituser/:id', function(req, res) {
 /*
  * DELETE to deleteuser.
  */
-router.delete('/deleteuser', function(req, res) {
+router.post('/deleteuser', function(req, res) {
     var db = req.db;
     var collection = db.get('userlist');
     var userToDelete = req.body.id;
-    collection.remove({ '_id' : userToDelete }, function(err) {
-        res.send((err === null) ? { msg: '' } : { msg:'error: ' + err });
+    console.info(userToDelete);
+    collection.remove({ '_id' : userToDelete }, function(err, result) {
+        if (err)
+            res.send(err);
+
+        //collection.find({},{},function(e,docs){
+        //    res.json(docs);
+        //});
     });
 });
 

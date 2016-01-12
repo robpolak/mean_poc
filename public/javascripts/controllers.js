@@ -47,19 +47,23 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
                 });
         };
 
-        $scope.deleteUser = function() {
-            $http.put('/users/deleteuser/', $scope.formData)
+        $scope.deleteUser = function(obj) {
+            var uid = obj.target.attributes.data.value;
+            //console.info(uid);
+            //var uid = angular.element(obj).data('uid');
+            var useridJson = angular.toJson({'id': uid});
+
+            console.log(useridJson);
+            $http.post('/users/deleteuser', useridJson)
                 .success(function(data) {
-                    $scope.formData = {}; // clear the form so our user is ready to enter another
-                    $scope.users = data;
-                    console.log(data);
-                    $scope.userForm.$setPristine();
+                    $http.get('users/userlist').success(function(data) {
+                        $scope.users = data;
+                    });
                 })
                 .error(function(data) {
                     console.log('Error: ' + data);
                 });
         };
-
     }]);
 
 meanpocControllers.controller('UserDetailCtrl', ['$scope', '$routeParams',
