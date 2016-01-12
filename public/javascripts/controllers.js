@@ -17,9 +17,12 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
             $scope.hoveredRow = null;
         };
 
-        $http.get('users/userlist').success(function(data) {
-            $scope.users = data;
-        });
+        var loadUserList = function(){
+            $http.get('users/userlist').success(function(data) {
+                $scope.users = data;
+            })
+        };
+        loadUserList();
 
         $scope.addUser = function() {
             $http.post('/users/adduser', $scope.formData)
@@ -49,21 +52,19 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
 
         $scope.deleteUser = function(obj) {
             var uid = obj.target.attributes.data.value;
-            //console.info(uid);
-            //var uid = angular.element(obj).data('uid');
             var useridJson = angular.toJson({'id': uid});
 
-            console.log(useridJson);
             $http.post('/users/deleteuser', useridJson)
-                .success(function(data) {
-                    $http.get('users/userlist').success(function(data) {
-                        $scope.users = data;
-                    });
-                })
-                .error(function(data) {
-                    console.log('Error: ' + data);
+                .then(function(deleteresponse) {
+                },
+                function(deleteresponse) {
+                    console.log('Error: ' + deleteresponse.data);
                 });
+            loadUserList();
         };
+
+
+
     }]);
 
 meanpocControllers.controller('UserDetailCtrl', ['$scope', '$routeParams',
