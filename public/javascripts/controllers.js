@@ -63,6 +63,18 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
             loadUserList();
         };
 
+        $scope.query = '';
+
+        $scope.search = function (user) {
+            var query = $scope.query.toLowerCase(),
+                fullname = user.fname.toLowerCase() + ' ' + user.lname.toLowerCase() + ' ' + user.phone;
+
+            if (fullname.indexOf(query) != -1) {
+                return true;
+            }
+            return false;
+        };
+
 
 
     }]);

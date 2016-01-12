@@ -47,8 +47,8 @@ block content
                         th
                             button(class='btn btn-danger btn-xs btn-block disabled') Delete
                     tbody
-                        tr(data-ng-repeat='user in users | filter:query' data-ng-class="{'selected':$index == hoveredRow}" data-ng-mouseover="setHoveredRow($index)" data-ng-mouseout="unsetHoveredRow($index)")
-                            td {{ user._id }}
+                        tr(data-ng-repeat='user in users | filter:search' data-ng-class="{'selected':$index == hoveredRow}" data-ng-mouseover="setHoveredRow($index)" data-ng-mouseout="unsetHoveredRow($index)")
+                            td {{ $index }}
                             td {{ user.fname }}
                             td {{ user.lname }}
                             td {{ user.phone }}
