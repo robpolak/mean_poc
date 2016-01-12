@@ -9,12 +9,18 @@ block content
                 li
                     a(href='/') Home
                 li(class='active')
-                    a(href="adduser") Add a User
+                    a(href="adduser") Add User
+
+    //
+        user-lookup(userid='56948247e2fba76e71977823')
+    span {{ user.fname }}
+    button(data-ng-click='loadUserDetail($event)', type='submit', class='btn btn-primary', data='56948247e2fba76e71977823')
+        | Load User
 
     div(class='container-fluid')
         div(class='row')
             div(class='col-md-12')
-                h2 Add User
+                h2 Edit User
                 #addUser
                     form(name='userForm')
                         table(class='table table-striped')
@@ -29,11 +35,11 @@ block content
                             tbody
                                 tr
                                     td(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
-                                        input#inputUserFName(data-ng-model='formData.fname', name='fname', type='text',  placeholder='First Name (Req)', 'required ng-maxlength=50')
+                                        input#inputUserFName(data-ng-model='user.fname', name='fname', type='text', 'required ng-maxlength=50')
                                     td(class='form-group')
-                                        input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
+                                        input#inputUserLName(data-ng-model='user.lname', name='lname', type='text', 'required ng-maxlength=50')
                                     td(class='form-group')
-                                        input#inputUserPhone(data-ng-model='formData.phone', name='phone', type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                        input#inputUserPhone(data-ng-model='user.phone', name='phone', type='text', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
                                     td
                                     td
                                     td(class='form-group')

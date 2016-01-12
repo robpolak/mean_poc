@@ -1,8 +1,6 @@
 extends layout
 
 block content
-    user-lookup(userid='5693dd15e88567d6538a70a6')
-    span {{ userdetails.fname }}
     //
         script(type='text/ng-template' id='myModalContent.html')
             div(class='modal-header')
@@ -36,7 +34,6 @@ block content
             div(class='col-md-10')
                 table(class='table table-striped')
                     thead
-                        th #
                         th First Name
                         th Last Name
                         th Phone
@@ -47,36 +44,36 @@ block content
                         th
                             button(class='btn btn-danger btn-xs btn-block disabled') Delete
                     tbody
-                        tr(data-ng-repeat='user in users | filter:search' ng-include='getTemplate(user)' data-ng-class="{'selected':$index == hoveredRow}" data-ng-mouseover="setHoveredRow($index)" data-ng-mouseout="unsetHoveredRow($index)")
-                            td {{ $index }}
-                            td {{ user.fname }}
+                        tr(data-ng-repeat='user in users | filter:search' data-ng-class="{'selected':$index == hoveredRow}" data-ng-mouseover="setHoveredRow($index)" data-ng-mouseout="unsetHoveredRow($index)")
+                            td {{ user.fname }} {{ user._id }}
                             td {{ user.lname }}
                             td {{ user.phone }}
+
                             td {{ user.mother }}
                             td {{ user.father }}
                             td
-                                button(data-ng-show="$index==hoveredRow" data-ng-click='editUser', data-uid='{{ user._id }}', type='button', class='btn btn-warning btn-xs btn-block') Change
+                                button(data-ng-click='loadUserDetail($event)', type='submit', data='{{ user._id }}', data-ng-show="$index==hoveredRow", class='btn btn-warning btn-xs btn-block') Change
                             td
-                                form(name='deleteForm')
-                                    div(class="form-group")
-                                        //input(type='text', data-ng-model='formData.uid')
-                                        button(data-ng-click='deleteUser($event)', type="submit", data='{{ user._id }}', data-ng-show="$index==hoveredRow", class='btn btn-danger btn-xs btn-block') Delete
+                                //form(name='deleteForm')
+                                    //div(class="form-group")
+                                button(data-ng-click='deleteUser($event)', type='submit', data='{{ user._id }}', data-ng-show="$index==hoveredRow", class='btn btn-danger btn-xs btn-block') Delete
 
             div(class='col-md-2')
-                h2 Edit User
-                | (Coming soon)
-                #addUser
-                    form(name='userForm')
-                        div(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
-                            input#inputUserFName(data-ng-model='formData.fname', name='fname', type='text',  placeholder='First Name (Req)', 'required ng-maxlength=50')
-                            p(ng-show='userForm.fname.$invalid && !userForm.fname.$pristine', class='help-block')
-                                | First Name is required and should be less that 50 characters
-                        div(class='form-group')
-                            input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
-                            p(ng-show='userForm.lname.$invalid && !userForm.lname.$pristine', class='help-block')
-                                | Last Name is required and should be less than 50 characters
-                        div(class='form-group')
-                            input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'required ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
-                        div(class='form-group')
-                            button(data-ng-click='saveUser()', type='submit', class='btn btn-primary', ng-disabled='userForm.$invalid')
-                                | Save User
+                div
+                    h2 Edit User
+                    | (Coming soon)
+                    #addUser
+                        form(name='userForm')
+                            div(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
+                                input#inputUserFName(data-ng-model='formData.fname', name='fname', type='text',  placeholder='First Name (Req)', 'required ng-maxlength=50')
+                                p(ng-show='userForm.fname.$invalid && !userForm.fname.$pristine', class='help-block')
+                                    | First Name is required and should be less that 50 characters
+                            div(class='form-group')
+                                input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
+                                p(ng-show='userForm.lname.$invalid && !userForm.lname.$pristine', class='help-block')
+                                    | Last Name is required and should be less than 50 characters
+                            div(class='form-group')
+                                input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'required ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                            div(class='form-group')
+                                button(data-ng-click='saveUser($event)', data='{{ formData._id }}', type='submit', class='btn btn-primary', ng-disabled='userForm.$invalid')
+                                    | Save User

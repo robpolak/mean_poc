@@ -24,21 +24,16 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
         };
         loadUserList();
 
-        // gets the template to ng-include for a table row / item
-        $scope.getTemplate = function (user) {
-            if (user.id === $scope.user.selected.id) return 'edit';
-            else return 'display';
+        $scope.loadUserDetail = function(obj){
+            var uid = obj.target.attributes.data.value;
+            console.log(uid);
+            $http.get('users/userdetails/' + uid).success(function(data) {
+                $scope.formData = data;
+            })
         };
+        //loadUserDetail();
 
-        $scope.showEditUser = function (user) {
-            $scope.user.selected = angular.copy(user);
-        };
-
-        $scope.reset = function () {
-            $scope.user.selected = {};
-        };
-
-        $scope.addUser = function() {
+        $scope.addUser = function(obj) {
             $http.post('/users/adduser', $scope.formData)
                 .success(function(data) {
                     $scope.formData = {}; // clear the form so our user is ready to enter another
@@ -88,10 +83,22 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
             }
             return false;
         };
-
-
-
-    }]);
+    }])
+    .directive('userLookup', ['$http',
+        function ($http){
+            return {
+                scope: {
+                    userid: '@'
+                },
+                controller:function($scope){
+                    $http.get('users/userdetails/' + $scope.userid).success(function(data) {
+                        $scope.user = data;
+                        console.info($scope.user.fname);
+                    });
+              }
+            }
+        }]
+    );
 
 meanpocControllers.controller('UserDetailCtrl', ['$scope', '$routeParams',
     function($scope, $routeParams) {
