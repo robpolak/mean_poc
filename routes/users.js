@@ -13,6 +13,31 @@ router.get('/userlist', function(req, res) {
 });
 
 /*
+ * GET fatherlist.
+ */
+router.get('/fatherlist/:id', function(req, res) {
+    var db = req.db;
+    var ignoreUid = req.params.id
+    var collection = db.get('userlist');
+    collection.find({_id: { $ne: ignoreUid }, gender: 'M'},{},function(e,docs){
+        res.json(docs);
+    });
+});
+
+/*
+ * GET motherlist.
+ */
+router.get('/motherlist/:id', function(req, res) {
+    var db = req.db;
+    var ingoreUid = req.params.id;
+    var collection = db.get('userlist');
+    collection.find({_id: { $ne: ignoreUid }, gender: 'F'},{},function(e,docs){
+        res.json(docs);
+    });
+});
+
+
+/*
  * GET userdetails.
  */
 router.get('/userdetails/:id', function(req, res) {
