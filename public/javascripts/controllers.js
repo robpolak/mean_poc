@@ -22,14 +22,29 @@ meanpocControllers.controller('UserListCtrl', ['$scope', '$http', '$routeParams'
                 $scope.users = data;
             })
         };
+
+        $scope.loadFatherList = function(ignoreEditUser){
+            $http.get('users/fatherlist/' + ignoreEditUser).success(function(data) {
+                $scope.fathers = data;
+            })
+        };
+
+        $scope.loadMotherList = function(ignoreEditUser){
+            $http.get('users/motherlist/' + ignoreEditUser).success(function(data) {
+                $scope.mothers = data;
+            })
+        };
+
         loadUserList();
+        //loadFatherList('5693e3d1aa32135c2e2ee722');
+        //loadMotherList('5693e3d1aa32135c2e2ee722');
 
         $scope.loadUserDetail = function(obj){
             var uid = obj.target.attributes.data.value;
-            console.log(uid);
             $http.get('users/userdetails/' + uid).success(function(data) {
                 $scope.formData = data;
             })
+            $scope.userForm.$setPristine();
         };
 
         $scope.addUser = function(obj) {

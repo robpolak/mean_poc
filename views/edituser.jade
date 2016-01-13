@@ -39,8 +39,8 @@ block content
                                     td(class='form-group')
                                         input#inputUserLName(data-ng-model='user.lname', name='lname', type='text', 'required ng-maxlength=50')
                                     td(class='form-group')
-                                        input#inputUserPhone(data-ng-model='user.phone', name='phone', type='text', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
-                                    td
+                                        //input#inputUserPhone(data-ng-model='user.phone', name='phone', type='text', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                        input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'required ng-pattern=/^\d{10}$/')td
                                     td
                                     td(class='form-group')
                                         button(data-ng-click='addUser($event)', type='submit', class='btn btn-primary', data='new' ng-disabled='userForm.$invalid')

@@ -34,7 +34,8 @@ block content
                                     td(class='form-group')
                                         input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
                                     td(class='form-group')
-                                        input#inputUserPhone(data-ng-model='formData.phone', name='phone', type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                        //input#inputUserPhone(data-ng-model='formData.phone', name='phone', type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                        input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='10 digits only', 'ng-pattern=/^\d{10}$/')
                                     td(class='form-group')
                                         span
                                             input(type='radio', data-ng-model='formData.gender', name='gender', value='M' checked=gender == "M")

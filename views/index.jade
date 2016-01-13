@@ -65,24 +65,31 @@ block content
                     h2 Edit User
                     #addUser
                             form(name='userForm')
-                            div(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
-                                input#inputUserFName(data-ng-model='formData.fname', name='fname', type='text',  placeholder='First Name (Req)', 'required ng-maxlength=50')
-                                p(ng-show='userForm.fname.$invalid && !userForm.fname.$pristine', class='help-block')
-                                    | First Name is required and should be less that 50 characters
-                            div(class='form-group')
-                                input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
-                                p(ng-show='userForm.lname.$invalid && !userForm.lname.$pristine', class='help-block')
-                                    | Last Name is required and should be less than 50 characters
-                            div(class='form-group')
-                                input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
-                            div(class='form-group')
-                                span
-                                    input(type='radio', data-ng-model='formData.gender', name='gender', value='M' checked=gender=="M")
-                                    | Male
-                                = '       '
-                                span
-                                    input(type='radio', data-ng-model='formData.gender', name='gender', value='F' checked=gender=="F")
-                                    | Female
-                            div(class='form-group')
-                                button(data-ng-click='saveUser($event)', data='{{ formData._id }}', type='submit', class='btn btn-primary', ng-disabled='userForm.$invalid')
-                                    | Save User
+                                div(class='form-group', ng-class="{ 'has-error': userForm.fname.$invalid }")
+                                    input#inputUserFName(data-ng-model='formData.fname', name='fname', type='text',  placeholder='First Name (Req)', 'required ng-maxlength=50')
+                                    p(ng-show='userForm.fname.$invalid && !userForm.fname.$pristine', class='help-block')
+                                        | First Name is required and should be less that 50 characters
+                                div(class='form-group')
+                                    input#inputUserLName(data-ng-model='formData.lname', name='lname', type='text', placeholder='Last Name (Req)', 'required ng-maxlength=50')
+                                    p(ng-show='userForm.lname.$invalid && !userForm.lname.$pristine', class='help-block')
+                                        | Last Name is required and should be less than 50 characters
+                                div(class='form-group')
+                                    //input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='US Phone w/Area Code', 'ng-pattern=/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/')
+                                    input#inputUserPhone(data-ng-model='formData.phone' type='text', placeholder='10 digits only', 'ng-pattern=/^\d{10}$/')
+                                div(class='form-group')
+                                    span
+                                        input(type='radio', data-ng-model='formData.gender', name='gender', value='M' checked=gender=="M")
+                                        | Male
+                                    = '       '
+                                    span
+                                        input(type='radio', data-ng-model='formData.gender', name='gender', value='F' checked=gender=="F")
+                                        | Female
+                                //span
+                                    //select(ng-model='formData.fathers' ng-options='father._id as father.fname for father in fathers')
+                                    //    option(value='')Select Father
+                                    //select
+                                        each father.name, father._id in fathers
+                                            option(value='father._id') {father.name}
+                                div(class='form-group')
+                                    button(data-ng-click='saveUser($event)', data='{{ formData._id }}', type='submit', class='btn btn-primary' ng-disabled='userForm.$invalid')
+                                        | Save User
